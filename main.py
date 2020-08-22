@@ -21,9 +21,24 @@ class board:
         return False
         pass
 
-    def inQuadrant(self, quadrantIndex):
+    def inQuadrant(self,number,quadrantY,quadrantX): 
+        quadrantX = test(quadrantX)
+        quadrantY = test(quadrantY)
+
+        for x in range(0):
+            for y in range(2):
 
         pass
+
+
+#I created this function in order to reset the quadrant position within the sudoku board.
+#
+    def calculatePosition(self,number):
+        while number % 3 != 0:
+            print(number)
+            number-=1
+        return number
+       
 
 class game:
     if __name__ == '__main__':
@@ -31,5 +46,7 @@ class game:
         dimensions = 9
         fun = board(dimensions)
         # print('Hello World')
-        print(np.matrix(board.matrix))
-        print(board.inRow(0,1,0))
+        # print(np.matrix(board.matrix))
+        # print(board.inRow(0,1,0))
+        
+        
