@@ -1,8 +1,8 @@
 import numpy as np
 
 # print (np.matrix(sudoku))
-class board:
-
+class board(object):
+    
     def isGameOver(self):
         for x in range(len(board.matrix)):
             for y in range(len(board.matrix[x])):
@@ -15,6 +15,7 @@ class board:
 
     def setNumber(self,coordX,coordY,number):
         board.matrix[coordX][coordY] = number
+        print('Move set at %2d,%2d',coordX,coordY)
 
     def inColumn(self,number,columnIndex):
         for num in range(len(board.matrix[columnIndex])):
@@ -31,16 +32,19 @@ class board:
         
 
     def inQuadrant(self,number,coordX,coordY):
-        coordX = calculatePosition(coordX)
-        coordY = calculatePosition(coordY)
+        coordX = self.calculatePosition(coordX)
+        coordY = self.calculatePosition(coordY)
+        print(self.calculatePosition(coordX))
+        print(self.calculatePosition(coordY))
+
         for x in range(coordX,coordX+3):
             for y in range(coordY,coordY+3):
                 if number == board.matrix[coordX][coordY]:
-                    return False
-        return True            
+                    return True
+        return False           
     
-    def checkMove(self,number,coordX,coordY):
-        return inQuadrant(number,coordX,coordY) and inRow(number,coordX) and inColumn(number,coordY)
+    def moveCanOccur(self,number,coordX,coordY):
+        return not self.inQuadrant(number,coordX,coordY) and not self.inRow(number,coordX) and not self.inColumn(number,coordY)
 
 
 #I created this function in order to reset the quadrant position within the sudoku board.
@@ -49,17 +53,27 @@ class board:
         while number % 3 != 0:
             number-=1
         return number
-        
-
-
+    
 class game:
+    def __init__(self):
+        pass
+
+    def main():
+        dimensions = 9
+        gameboard = board(dimensions)
+        while not gameboard.isGameOver():
+            while True:
+                print(np.matrix(gameboard.matrix))
+                row = int(input('Enter the X Coordinate: '))
+                col = int(input('Enter the Y coordinate: '))
+                num = int(input('Enter the number: '))
+                if gameboard.moveCanOccur(num,row,col):
+                    gameboard.setNumber(row,col,num)
+                    break
+                else:
+                    print('Error , Try again')
+
+
     if __name__ == '__main__':
-    #   dimensions = int(input("What board size would you like to play with?"))
-            dimensions = 9
-            fun = board(dimensions)
-            while(fun.isGameOver() == False):
-                col = int(input('Which column do you want to enter the number?'))
-                row = int(input('Enter the X Coordinate'))
-                num = int(input('Enter the Y Coordinate'))
-                fun.setNumber(row,col,num)
-                print(np.matrix(board.matrix))
+        main()
+           
