@@ -1,4 +1,5 @@
 import numpy as np
+import pygame as py 
 
 # print (np.matrix(sudoku))
 class board(object):
@@ -20,6 +21,7 @@ class board(object):
     def inColumn(self,number,columnIndex):
         for num in range(len(board.matrix[columnIndex])):
             if number == (board.matrix[num][columnIndex]):
+                print('Number already present in column')
                 return True
         return False
         
@@ -27,6 +29,7 @@ class board(object):
     def inRow(self,number,rowIndex):
         for num in range(len(board.matrix[rowIndex])):
             if number == (board.matrix[rowIndex][num]):
+                print('Number already present in row')
                 return True
         return False
         
@@ -36,10 +39,10 @@ class board(object):
         coordY = self.calculatePosition(coordY)
         print(self.calculatePosition(coordX))
         print(self.calculatePosition(coordY))
-
         for x in range(coordX,coordX+3):
             for y in range(coordY,coordY+3):
                 if number == board.matrix[coordX][coordY]:
+                    print('Number already exists in that quadrant')
                     return True
         return False           
     
