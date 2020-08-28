@@ -49,9 +49,8 @@ def print_board(b):
         for q in range(9):
             if q % 3 == 0 and q != 0:
                 print("|", end="")
-
             if q == 8:
-                print(b[z][q])
+                print(str(b[z][q])+ " |")
             else:
                 print(str(b[z][q]) + " ", end="")
 
